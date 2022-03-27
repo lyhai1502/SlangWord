@@ -50,7 +50,7 @@ public class Main {
                     break;
                 case 4:
                     // Add slang word
-
+                    wordDictionary.addSlangWord(scanner);
                     break;
                 case 5:
                     // Edit slang word

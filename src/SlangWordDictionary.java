@@ -52,5 +52,24 @@ public class SlangWordDictionary {
         }
     }
 
+    public void addSlangWord(Scanner scanner) {
+        System.out.println("Enter new slang word you want to add: ");
+        String newSlg = scanner.nextLine();
+        boolean flag = false;
+        while(!flag) {
+            flag = true;
+            for (String key : wordDict.keySet())
+                if (key.equals(newSlg)){
+                    flag = false;
+                    System.out.println("Entered string has been duplicated. Please enter another.");
+                    newSlg = scanner.nextLine();
+                }
+        }
+        System.out.println("Enter new definition of this word: ");
+        String newDef = scanner.nextLine();
+        wordDict.put(newSlg, newDef);
+    }
+
+
 
 }
