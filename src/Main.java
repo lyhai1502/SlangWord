@@ -46,9 +46,11 @@ public class Main {
                     break;
                 case 3:
                     // Show history
+                    wordDictionary.showHistory();
                     break;
                 case 4:
                     // Add slang word
+
                     break;
                 case 5:
                     // Edit slang word

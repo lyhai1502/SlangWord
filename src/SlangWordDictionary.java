@@ -36,9 +36,21 @@ public class SlangWordDictionary {
             for (String key : list) {
                 System.out.println(key + ": " + wordDict.get(key));
             }
-            history.add(word);
         }
+        history.add(word);
 
     }
+
+    public void showHistory() {
+        if(history.isEmpty())
+            System.out.println("History is empty.");
+        else {
+            System.out.println("History of finding: \n");
+            for (String line : history) {
+                System.out.println(line);
+            }
+        }
+    }
+
 
 }
