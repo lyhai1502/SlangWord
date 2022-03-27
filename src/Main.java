@@ -40,6 +40,9 @@ public class Main {
                     break;
                 case 2:
                     // Find by definition
+                    System.out.println("Enter definition: ");
+                    String def = scanner.nextLine();
+                    wordDictionary.findByDefinition(def);
                     break;
                 case 3:
                     // Show history
