@@ -34,6 +34,9 @@ public class Main {
                     break;
                 case 1:
                     // Find by slang word
+                    System.out.println("Enter slang word: ");
+                    String slword = scanner.nextLine();
+                    wordDictionary.findBySlangWord(slword);
                     break;
                 case 2:
                     // Find by definition
