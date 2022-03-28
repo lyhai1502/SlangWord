@@ -14,7 +14,10 @@ public class SlangWordDictionary {
     public void findBySlangWord(String wordFind) {
         String def = wordDict.get(wordFind.toLowerCase(Locale.ROOT));
         if (def != null) {
-            System.out.println("Definition of " + wordFind + ": " + def);
+            String[] params = def.split("\\| ");
+            System.out.println("Definition of " + wordFind + ": ");
+            for (String param : params) System.out.println(param);
+
         } else {
             System.out.println("Can't found " + wordFind);
         }
@@ -52,22 +55,35 @@ public class SlangWordDictionary {
         }
     }
 
-    public void addSlangWord(Scanner scanner) {
+    public void addSlangWord(Scanner scanner) throws IOException {
         System.out.println("Enter new slang word you want to add: ");
         String newSlg = scanner.nextLine();
-        boolean flag = false;
-        while(!flag) {
-            flag = true;
-            for (String key : wordDict.keySet())
-                if (key.equals(newSlg)){
-                    flag = false;
-                    System.out.println("Entered string has been duplicated. Please enter another.");
-                    newSlg = scanner.nextLine();
-                }
+        String def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
+        while (def != null){
+            System.out.println("Entered string has been duplicated. Please enter another.");
+            newSlg = scanner.nextLine();
+            def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
         }
         System.out.println("Enter new definition of this word: ");
         String newDef = scanner.nextLine();
         wordDict.put(newSlg, newDef);
+        HandleFile.writeHashmapToFile("src/data/slang_added.txt", wordDict);
+    }
+
+    public void editSlangWord(Scanner scanner) throws IOException {
+        System.out.println("Enter word you want to edit.");
+        String newSlg = scanner.nextLine();
+
+        String def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
+        while(def == null){
+            System.out.println("Entered word has not been found. Enter another slang word.");
+            newSlg = scanner.nextLine();
+            def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
+        }
+        System.out.println("Enter new definition of this word: ");
+        def = scanner.nextLine();
+        wordDict.put(newSlg, def);
+        HandleFile.writeHashmapToFile("src/data/slang_edited.txt", wordDict);
     }
 
 
