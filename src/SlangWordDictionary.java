@@ -86,6 +86,23 @@ public class SlangWordDictionary {
         HandleFile.writeHashmapToFile("src/data/slang_edited.txt", wordDict);
     }
 
+    public void deleteSlangWord(Scanner scanner) throws IOException{
+        System.out.println("Enter word you want to delete.");
+        String newSlg = scanner.nextLine();
+        String def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
+        while(def == null){
+            System.out.println("Entered word has not been found. Enter another slang word.");
+            newSlg = scanner.nextLine();
+            def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
+        }
+        wordDict.remove(newSlg);
+        String findDef = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
+        if(findDef == null) {
+            System.out.println("Successfully deleted " + newSlg);
+            HandleFile.writeHashmapToFile("src/data/slang_deleted.txt", wordDict);
+        }
+        else System.out.println("Failed to delete " + newSlg);
+    }
 
 
 }

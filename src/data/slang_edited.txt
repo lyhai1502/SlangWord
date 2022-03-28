@@ -17,7 +17,7 @@ teh`The| Used to emphasise the next word
 tek`Tek-9 machine pistol| Technique
 ten`Person with a perfect body
 cdc`Cult of the Dead Cow| Crudely Drawn Cock
-$`Tien Bac
+$`TienBac
 &`And
 idnk`I Do Not Know
 *`Indicating a spelling correction

@@ -58,6 +58,7 @@ public class Main {
                     break;
                 case 6:
                     // Delete slang word
+                    wordDictionary.deleteSlangWord(scanner);
                     break;
                 case 7:
                     // Reset slang word

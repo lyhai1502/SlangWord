@@ -17,7 +17,6 @@ teh`The| Used to emphasise the next word
 tek`Tek-9 machine pistol| Technique
 ten`Person with a perfect body
 cdc`Cult of the Dead Cow| Crudely Drawn Cock
-$`Dollar| money
 &`And
 idnk`I Do Not Know
 *`Indicating a spelling correction
@@ -6966,7 +6965,6 @@ tcgb`Take Care, God Bless
 botw`Blog Of The Week
 biddy`Girl| woman
 bows`Elbows
-lyhai`15022002
 bowl`Part of a marijuana pipe
 itma`It's That Man Again
 plumbum`Plumber's crack
