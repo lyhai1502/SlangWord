@@ -66,6 +66,7 @@ public class Main {
                     break;
                 case 8:
                     // Random slang word
+                    wordDictionary.random1SlangWord();
                     break;
                 case 9:
                     // Show random slang word with 4 answer
