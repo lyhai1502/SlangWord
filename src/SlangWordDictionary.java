@@ -2,10 +2,13 @@ import java.io.IOException;
 import java.util.*;
 
 public class SlangWordDictionary {
-    private final HashMap<String, String>  wordDict;
+    private HashMap<String, String>  wordDict;
     private final LinkedList<String> history = new LinkedList<>();
 
     private static final String slangFile = "src/data/slang.txt";
+    private static final String slangFile_Added = "src/data/slang_added.txt";
+    private static final String slangFile_Edited = "src/data/slang_edited.txt";
+    private static final String slangFile_Deleted = "src/data/slang_deleted.txt";
 
     public SlangWordDictionary() throws IOException {
         wordDict = HandleFile.readFile(slangFile);
@@ -48,7 +51,7 @@ public class SlangWordDictionary {
         if(history.isEmpty())
             System.out.println("History is empty.");
         else {
-            System.out.println("History of finding: \n");
+            System.out.println("History of finding: ");
             for (String line : history) {
                 System.out.println(line);
             }
@@ -67,7 +70,7 @@ public class SlangWordDictionary {
         System.out.println("Enter new definition of this word: ");
         String newDef = scanner.nextLine();
         wordDict.put(newSlg, newDef);
-        HandleFile.writeHashmapToFile("src/data/slang_added.txt", wordDict);
+        HandleFile.writeHashmapToFile(slangFile_Added, wordDict);
     }
 
     public void editSlangWord(Scanner scanner) throws IOException {
@@ -83,25 +86,35 @@ public class SlangWordDictionary {
         System.out.println("Enter new definition of this word: ");
         def = scanner.nextLine();
         wordDict.put(newSlg, def);
-        HandleFile.writeHashmapToFile("src/data/slang_edited.txt", wordDict);
+        HandleFile.writeHashmapToFile(slangFile_Edited, wordDict);
     }
 
-    public void deleteSlangWord(Scanner scanner) throws IOException{
+    public void deleteSlangWord(Scanner scanner) throws IOException {
         System.out.println("Enter word you want to delete.");
         String newSlg = scanner.nextLine();
         String def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
-        while(def == null){
+        while (def == null) {
             System.out.println("Entered word has not been found. Enter another slang word.");
             newSlg = scanner.nextLine();
             def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
         }
-        wordDict.remove(newSlg);
-        String findDef = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
-        if(findDef == null) {
-            System.out.println("Successfully deleted " + newSlg);
-            HandleFile.writeHashmapToFile("src/data/slang_deleted.txt", wordDict);
+        System.out.println("Do you want to delete this word? (Y/N)");
+        String option = scanner.nextLine();
+        if (option.toLowerCase(Locale.ROOT).equals("y")) {
+            wordDict.remove(newSlg);
+            String findDef = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
+            if (findDef == null) {
+                System.out.println("Successfully deleted " + newSlg + ".");
+                HandleFile.writeHashmapToFile(slangFile_Deleted, wordDict);
+            } else System.out.println("Failed to delete " + newSlg);
         }
-        else System.out.println("Failed to delete " + newSlg);
+        else System.out.println("This word has not been deleted.");
+    }
+
+    public void reset() throws IOException {
+        wordDict = HandleFile.readFile(slangFile);
+        if(!wordDict.isEmpty()) System.out.println("Successfully reset slang words dictionary.");
+        else System.out.println("Failed to reset slang words dictionary.");
     }
 
 

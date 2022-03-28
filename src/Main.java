@@ -62,6 +62,7 @@ public class Main {
                     break;
                 case 7:
                     // Reset slang word
+                    wordDictionary.reset();
                     break;
                 case 8:
                     // Random slang word
