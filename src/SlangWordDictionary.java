@@ -6,9 +6,7 @@ public class SlangWordDictionary {
     private final LinkedList<String> history = new LinkedList<>();
 
     private static final String slangFile = "src/data/slang.txt";
-    private static final String slangFile_Added = "src/data/slang_added.txt";
-    private static final String slangFile_Edited = "src/data/slang_edited.txt";
-    private static final String slangFile_Deleted = "src/data/slang_deleted.txt";
+    private static final String slangFile_Updated = "src/data/slang_updated.txt";
 
     public SlangWordDictionary() throws IOException {
         wordDict = HandleFile.readFile(slangFile);
@@ -63,14 +61,14 @@ public class SlangWordDictionary {
         String newSlg = scanner.nextLine();
         String def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
         while (def != null){
-            System.out.println("Entered string has been duplicated. Please enter another.");
+            System.out.println("Entered string has been existed. Please enter another word.");
             newSlg = scanner.nextLine();
             def = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
         }
         System.out.println("Enter new definition of this word: ");
         String newDef = scanner.nextLine();
         wordDict.put(newSlg, newDef);
-        HandleFile.writeHashmapToFile(slangFile_Added, wordDict);
+        HandleFile.writeHashmapToFile(slangFile_Updated, wordDict);
     }
 
     public void editSlangWord(Scanner scanner) throws IOException {
@@ -86,7 +84,7 @@ public class SlangWordDictionary {
         System.out.println("Enter new definition of this word: ");
         def = scanner.nextLine();
         wordDict.put(newSlg, def);
-        HandleFile.writeHashmapToFile(slangFile_Edited, wordDict);
+        HandleFile.writeHashmapToFile(slangFile_Updated, wordDict);
     }
 
     public void deleteSlangWord(Scanner scanner) throws IOException {
@@ -105,7 +103,7 @@ public class SlangWordDictionary {
             String findDef = wordDict.get(newSlg.toLowerCase(Locale.ROOT));
             if (findDef == null) {
                 System.out.println("Successfully deleted " + newSlg + ".");
-                HandleFile.writeHashmapToFile(slangFile_Deleted, wordDict);
+                HandleFile.writeHashmapToFile(slangFile_Updated, wordDict);
             } else System.out.println("Failed to delete " + newSlg);
         }
         else System.out.println("This word has not been deleted.");
@@ -113,7 +111,10 @@ public class SlangWordDictionary {
 
     public void reset() throws IOException {
         wordDict = HandleFile.readFile(slangFile);
-        if(!wordDict.isEmpty()) System.out.println("Successfully reset slang words dictionary.");
+        if(!wordDict.isEmpty()){
+            System.out.println("Successfully reset slang words dictionary.");
+            HandleFile.writeHashmapToFile(slangFile_Updated, wordDict);
+            }
         else System.out.println("Failed to reset slang words dictionary.");
     }
 
@@ -154,45 +155,118 @@ public class SlangWordDictionary {
                     // randomKey1
                     if (randomKey1.equals(answer)) {
                         System.out.println("Your answer was CORRECT.");
-                        System.out.println(answer + ": "+wordDict.get(answer.toString()));
+                        System.out.println(answer + ": " + wordDict.get(answer.toString()));
                     }
                     else {
                         System.out.println("Your answer was INCORRECT.");
-                        System.out.println("The correct answer: " + wordDict.get(answer.toString()));
+                        System.out.println("The correct answer:\n" + answer + ": " + wordDict.get(answer.toString()));
                     }
                     break;
                 case "b":
                     if (randomKey2.equals(answer)) {
                         System.out.println("Your answer was CORRECT.");
-                        System.out.println(answer + ": "+wordDict.get(answer.toString()));
+                        System.out.println(answer + ": " + wordDict.get(answer.toString()));
                     }
                     else {
                         System.out.println("Your answer was INCORRECT.");
-                        System.out.println("The correct answer: " + wordDict.get(answer.toString()));
+                        System.out.println("The correct answer:\n" + answer + ": " + wordDict.get(answer.toString()));
                     }
                     break;
                 case "c":
                     if (randomKey3.equals(answer)) {
                         System.out.println("Your answer was CORRECT.");
-                        System.out.println(answer + ": "+wordDict.get(answer.toString()));
+                        System.out.println(answer + ": " + wordDict.get(answer.toString()));
                     }
                     else {
                         System.out.println("Your answer was INCORRECT.");
-                        System.out.println("The correct answer: " + wordDict.get(answer.toString()));
+                        System.out.println("The correct answer:\n" + answer + ": " + wordDict.get(answer.toString()));
                     }
                     break;
                 case "d":
                     if (randomKey4.equals(answer)) {
                         System.out.println("Your answer was CORRECT.");
-                        System.out.println(answer + ": "+wordDict.get(answer.toString()));
+                        System.out.println(answer + ": " + wordDict.get(answer.toString()));
                     }
                     else {
                         System.out.println("Your answer was INCORRECT.");
-                        System.out.println("The correct answer: " + wordDict.get(answer.toString()));
+                        System.out.println("The correct answer:\n" + answer + ": " + wordDict.get(answer.toString()));
                     }
                     break;
                 default:
-                    System.out.println("Your answer was not SUITABLE.\nDo you want to choose again? (y/n)");
+                    System.out.println("Your answer was not SUITABLE.\nDo you want to choose again? (Y/N)");
+                    again = scanner.nextLine().toLowerCase(Locale.ROOT);
+                    break;
+            }
+        }while(again.equals("y"));
+    }
+
+    public void quizRandomDefinition(Scanner scanner){
+        Random generator = new Random();
+        Object[] keys = wordDict.keySet().toArray();
+        Object randomKey1 = keys[generator.nextInt(keys.length)];
+        Object randomKey2 = keys[generator.nextInt(keys.length)];
+        Object randomKey3 = keys[generator.nextInt(keys.length)];
+        Object randomKey4 = keys[generator.nextInt(keys.length)];
+
+        List<Object> answerList =  Arrays.asList(randomKey1, randomKey2, randomKey3, randomKey4);
+
+        Object answer = answerList.get(generator.nextInt(answerList.size()));
+        //System.out.println(wordDict.get(answer));
+        String again ;
+        do {
+            again = "n";
+            System.out.println("Which word has this definition: " + wordDict.get(answer.toString()) + "?");
+            System.out.println("A: " + randomKey1);
+            System.out.println("B: " + randomKey2);
+            System.out.println("C: " + randomKey3);
+            System.out.println("D: " + randomKey4);
+
+            System.out.println("Your answer: ");
+            String choose = scanner.nextLine().toLowerCase(Locale.ROOT);
+            switch (choose) {
+                case "a":
+                    // randomKey1
+                    if (randomKey1.equals(answer)) {
+                        System.out.println("Your answer was CORRECT.");
+                        System.out.println(answer + ": " + wordDict.get(answer.toString()));
+                    }
+                    else {
+                        System.out.println("Your answer was INCORRECT.");
+                        System.out.println("The correct answer:\n" + answer + ": " + wordDict.get(answer.toString()));
+                    }
+                    break;
+                case "b":
+                    if (randomKey2.equals(answer)) {
+                        System.out.println("Your answer was CORRECT.");
+                        System.out.println(answer + ": " + wordDict.get(answer.toString()));
+                    }
+                    else {
+                        System.out.println("Your answer was INCORRECT.");
+                        System.out.println("The correct answer:\n" + answer + ": " + wordDict.get(answer.toString()));
+                    }
+                    break;
+                case "c":
+                    if (randomKey3.equals(answer)) {
+                        System.out.println("Your answer was CORRECT.");
+                        System.out.println(answer + ": " + wordDict.get(answer.toString()));
+                    }
+                    else {
+                        System.out.println("Your answer was INCORRECT.");
+                        System.out.println("The correct answer:\n" + answer + ": " + wordDict.get(answer.toString()));
+                    }
+                    break;
+                case "d":
+                    if (randomKey4.equals(answer)) {
+                        System.out.println("Your answer was CORRECT.");
+                        System.out.println(answer + ": " + wordDict.get(answer.toString()));
+                    }
+                    else {
+                        System.out.println("Your answer was INCORRECT.");
+                        System.out.println("The correct answer:\n" + answer + ": " + wordDict.get(answer.toString()));
+                    }
+                    break;
+                default:
+                    System.out.println("Your answer was not SUITABLE.\nDo you want to choose again? (Y/N)");
                     again = scanner.nextLine().toLowerCase(Locale.ROOT);
                     break;
             }

@@ -17,6 +17,10 @@ public class Main {
         System.out.println("10: Quiz: Show 1 definition with 4 answers");
         System.out.println("===============================================");
     }
+    private  static void stopProgram() throws IOException {
+        System.out.println("Press enter to continue.");
+        System.in.read();
+    }
 
     public static void main(String[] args) throws IOException {
         SlangWordDictionary wordDictionary = new SlangWordDictionary();
@@ -29,55 +33,68 @@ public class Main {
             option = scanner.nextInt();
             scanner.nextLine();
             switch (option) {
-                case 0:
-                    // Exit
-                    break;
-                case 1:
+                case 0 ->
+                        // Exit
+                        System.out.println("You have exited the program.");
+                case 1 -> {
                     // Find by slang word
                     System.out.println("Enter slang word: ");
-                    String slword = scanner.nextLine();
-                    wordDictionary.findBySlangWord(slword);
-                    break;
-                case 2:
+                    String sword = scanner.nextLine();
+                    wordDictionary.findBySlangWord(sword);
+                    stopProgram();
+                }
+                case 2 -> {
                     // Find by definition
                     System.out.println("Enter definition: ");
                     String def = scanner.nextLine();
                     wordDictionary.findByDefinition(def);
-                    break;
-                case 3:
+                    stopProgram();
+                }
+                case 3 -> {
                     // Show history
                     wordDictionary.showHistory();
-                    break;
-                case 4:
+                    stopProgram();
+                }
+                case 4 ->{
                     // Add slang word
                     wordDictionary.addSlangWord(scanner);
-                    break;
-                case 5:
+                    stopProgram();
+                }
+                case 5 -> {
                     // Edit slang word
                     wordDictionary.editSlangWord(scanner);
-                    break;
-                case 6:
+                    stopProgram();
+                }
+                case 6 -> {
                     // Delete slang word
                     wordDictionary.deleteSlangWord(scanner);
-                    break;
-                case 7:
+                    stopProgram();
+                }
+                case 7 -> {
                     // Reset slang word
                     wordDictionary.reset();
-                    break;
-                case 8:
+                    stopProgram();
+                }
+                case 8 -> {
                     // Random slang word
                     wordDictionary.random1SlangWord();
-                    break;
-                case 9:
+                    stopProgram();
+                }
+                case 9 -> {
                     // Show random slang word with 4 answer
                     wordDictionary.quizRandomSlangWord(scanner);
-                    break;
-                case 10:
+                    stopProgram();
+                }
+                case 10 -> {
                     // Show random definition with 4 answer
-                    break;
+                    wordDictionary.quizRandomDefinition(scanner);
+                    stopProgram();
+                }
+                default -> {
+                    System.out.println("Your choose was not SUITABLE.");
+                    stopProgram();
 
-                default:
-                    break;
+                }
             }
         } while (option != 0);
     }
