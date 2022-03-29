@@ -70,6 +70,7 @@ public class Main {
                     break;
                 case 9:
                     // Show random slang word with 4 answer
+                    wordDictionary.quizRandomSlangWord(scanner);
                     break;
                 case 10:
                     // Show random definition with 4 answer
@@ -78,6 +79,6 @@ public class Main {
                 default:
                     break;
             }
-        } while (option != 10);
+        } while (option != 0);
     }
 }
