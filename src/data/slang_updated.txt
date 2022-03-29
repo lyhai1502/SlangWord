@@ -1,3 +1,4 @@
+`ngu
 tf2`Team Fortress 2
 ccc`Coricidin Cough & Cold
 tds`Technical Dificulties
@@ -17,7 +18,6 @@ teh`The| Used to emphasise the next word
 tek`Tek-9 machine pistol| Technique
 ten`Person with a perfect body
 cdc`Cult of the Dead Cow| Crudely Drawn Cock
-$`Dollar| money
 &`And
 idnk`I Do Not Know
 *`Indicating a spelling correction

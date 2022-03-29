@@ -129,7 +129,7 @@ public class SlangWordDictionary {
         Object[] keys = wordDict.keySet().toArray();
         Object randomKey = keys[generator.nextInt(keys.length)];
 
-        System.out.println("Random word on this day:\n"+ randomKey + ": " + wordDict.get(randomKey.toString()));
+        System.out.println("Random slang word on this day:\n"+ randomKey + ": " + wordDict.get(randomKey.toString()));
     }
 
     public void quizRandomSlangWord(Scanner scanner){

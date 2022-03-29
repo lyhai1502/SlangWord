@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     private static void showMenu() {
-        System.out.println("================ MENU =========================");
+        System.out.println("================== MENU =========================");
         System.out.println("0: Exit");
         System.out.println("1: Find by slang word");
         System.out.println("2: Find by definition");
@@ -18,7 +18,7 @@ public class Main {
         System.out.println("===============================================");
     }
     private  static void stopProgram() throws IOException {
-        System.out.println("Press enter to continue.");
+        System.out.println("\nPress enter to continue.");
         System.in.read();
     }
 
