@@ -3,16 +3,18 @@ import java.util.*;
 
 public class SlangWordDictionary {
     private HashMap<String, String>  wordDict;
-    private final LinkedList<String> history = new LinkedList<>();
+    private final LinkedList<String> history;
 
     private static final String slangFile = "src/data/slang.txt";
     private static final String slangFile_Updated = "src/data/slang_updated.txt";
+    private static final String historyFile = "src/data/history.txt";
 
     public SlangWordDictionary() throws IOException {
         wordDict = HandleFile.readFile(slangFile);
+        history = HandleFile.readHistory(historyFile);
     }
 
-    public void findBySlangWord(String wordFind) {
+    public void findBySlangWord(String wordFind) throws IOException {
         String def = wordDict.get(wordFind.toLowerCase(Locale.ROOT));
         if (def != null) {
             String[] params = def.split("\\| ");
@@ -23,9 +25,10 @@ public class SlangWordDictionary {
             System.out.println("Can't found " + wordFind);
         }
         history.add(wordFind);
+        HandleFile.writeHistory(historyFile, history);
     }
 
-    public void findByDefinition(String word) {
+    public void findByDefinition(String word) throws IOException {
         LinkedList<String> list = new LinkedList<>();
         for (String key : wordDict.keySet()) {
             String lowerWord = word.toLowerCase(Locale.ROOT);
@@ -42,6 +45,7 @@ public class SlangWordDictionary {
             }
         }
         history.add(word);
+        HandleFile.writeHistory(historyFile, history);
 
     }
 
@@ -118,6 +122,7 @@ public class SlangWordDictionary {
         else System.out.println("Failed to reset slang words dictionary.");
     }
 
+    // Cac Object tim ngau nhien duoc tham khao tu Internet. Phan tram tham khao: 10%
 
     public void random1SlangWord(){
         Random generator = new Random();

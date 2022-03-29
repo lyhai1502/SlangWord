@@ -93,7 +93,6 @@ public class Main {
                 default -> {
                     System.out.println("Your choose was not SUITABLE.");
                     stopProgram();
-
                 }
             }
         } while (option != 0);
