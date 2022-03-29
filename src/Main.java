@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
     private static void showMenu() {
-        System.out.println("================== MENU =========================");
+        System.out.println("================== MENU =======================");
         System.out.println("0: Exit");
         System.out.println("1: Find by slang word");
         System.out.println("2: Find by definition");
